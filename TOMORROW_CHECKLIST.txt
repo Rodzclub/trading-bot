@@ -1,0 +1,236 @@
+================================================================================
+                    ✅ TOMORROW'S EXECUTION CHECKLIST
+                        17 May 2026 - Ready to Trade
+================================================================================
+
+🕐 TIMING: Start at 03:45 EST (before premarket opens at 04:00)
+
+================================================================================
+                         SETUP PHASE (15 minutes)
+================================================================================
+
+Fecha: ___________  Hora Inicio: ___________
+
+BEFORE EXECUTING main.py:
+
+[ ] 1. Open Terminal 1 & Navigate to project folder
+        cd C:\Users\Mireysa Paz\OneDrive\Documents\Claude\Projects\Trading bot\
+
+[ ] 2. Activate Virtual Environment
+        Windows: venv\Scripts\activate
+        Mac/Linux: source venv/bin/activate
+
+[ ] 3. CRITICAL: Verify .env file has credentials
+        cat .env | grep TD_CONSUMER_KEY
+        cat .env | grep TD_ACCOUNT_ID
+        ↪ MUST NOT BE EMPTY
+
+[ ] 4. Check token.json exists (from setup_oauth.py)
+        ls token.json
+        ↪ Should show: token.json (if missing, run setup_oauth.py)
+
+[ ] 5. Verify logs folder exists
+        mkdir -p logs
+
+[ ] 6. Test broker connection (should complete in ~10 seconds)
+        python thinkorswim_broker.py
+        ↪ Should show ✅ CONEXIÓN EXITOSA
+
+================================================================================
+                       EXECUTION PHASE (Start 03:45)
+================================================================================
+
+[ ] 7. TERMINAL 1: Start Main Bot
+        python main.py
+        ↪ Should show: 🤖 TRADING BOT INICIADO
+        ↪ Status: GREEN (ready to operate)
+
+[ ] 8. TERMINAL 2 (Optional but recommended): Start Dashboard
+        streamlit run dashboard/app.py
+        ↪ Opens at http://localhost:8501
+        ↪ Useful for real-time monitoring
+
+[ ] 9. TERMINAL 3 (Recommended): Monitor Logs
+        tail -f logs/trading_bot_main.log
+        ↪ Shows all operations in real-time
+
+[ ] 10. BROWSER (Optional): Keep Thinkorswim open
+        https://www.thinkorswim.com or Thinkorswim app
+        ↪ Verify orders appear here in real-time
+
+================================================================================
+                      DURING TRADING (04:00-20:00)
+================================================================================
+
+EVERY 30 MINUTES:
+
+[ ] Monitor logs for errors
+        tail logs/trading_bot_main.log | grep ERROR
+
+[ ] Check P&L progress
+        tail logs/trading_bot_main.log | grep "P&L"
+
+[ ] Verify positions are being tracked
+        Open dashboard at http://localhost:8501
+
+TRADE EXECUTION (Should happen automatically):
+
+[ ] Watch for ✅ notifications: "Orden colocada"
+[ ] Verify position appears in Positions tab
+[ ] Monitor stop loss and profit targets
+[ ] Positions should close automatically at targets
+
+IF PROBLEMS OCCUR:
+
+[ ] Screenshot the error
+[ ] Check logs: tail -50 logs/trading_bot_main.log
+[ ] Document timestamp and action taken
+[ ] Do NOT modify parameters during operation
+
+================================================================================
+                     END OF DAY (16:00-17:00)
+================================================================================
+
+[ ] 11. Close all open positions manually if needed
+        (Bot should handle this, but verify)
+
+[ ] 12. Review daily P&L
+        Dashboard → Límites Diarios
+
+[ ] 13. Export today's log
+        tail -500 logs/trading_bot_main.log > today_trades.log
+
+[ ] 14. Document results:
+        - Total trades: ___________
+        - Winners: ___________
+        - Losers: ___________
+        - P&L: $___________
+        - Comments: _________________________________________
+
+[ ] 15. Verify all positions closed
+        Dashboard → Posiciones should be empty
+
+================================================================================
+                        EMERGENCY PROCEDURES
+================================================================================
+
+IF BOT CRASHES:
+1. Kill the process (Ctrl+C)
+2. Check error: tail -20 logs/trading_bot_main.log
+3. Document the error
+4. Restart: python main.py
+
+IF POSITION WON'T CLOSE:
+1. Check dashboard for the position
+2. Manually close in Thinkorswim app
+3. Wait 30 seconds for bot to sync
+4. Continue monitoring
+
+IF LOSING > 2% IN A DAY:
+1. BOT WILL AUTO-STOP (Daily limits enforcer)
+2. All new trades blocked
+3. Monitor existing positions
+4. Manual override: Review config_thinkorswim.py MAX_DAILY_LOSS_PCT
+
+================================================================================
+                         CRITICAL REMINDERS
+================================================================================
+
+✋ DO NOT:
+   ❌ Change parameters during operation
+   ❌ Modify RISK_PER_TRADE (even if "feeling lucky")
+   ❌ Bypass stop losses
+   ❌ Trade outside scheduled hours
+   ❌ Save passwords or API keys
+   ❌ Commit token.json to git
+
+✅ DO:
+   ✓ Keep bot running for full market day
+   ✓ Monitor logs regularly
+   ✓ Let limits enforcer work
+   ✓ Document every trade
+   ✓ Stay calm and follow the system
+
+================================================================================
+                      SUCCESS INDICATORS
+================================================================================
+
+After 1 hour (05:00 EST), you should see:
+
+✅ GOOD:
+   • 0-2 trades executed
+   • Win rate: 50-60%
+   • P&L: -$100 to +$150
+   • No errors in logs
+   • Positions opening and closing automatically
+
+⚠️  CONCERNING:
+   • > 5 consecutive losses
+   • Same symbol entered 3x in a row
+   • Errors in logs every few minutes
+   • Positions not closing at profit target
+
+❌ STOP IMMEDIATELY:
+   • Daily loss > 2%
+   • Bot crashes repeatedly
+   • Trades not executing
+   • Can't connect to broker
+
+================================================================================
+                    DOCUMENTATION FOR REVIEW
+================================================================================
+
+Read BEFORE trading tomorrow:
+  [ ] SETUP_TOMORROW.md (Step-by-step guide)
+  [ ] README.md (Project overview)
+  [ ] THINKORSWIM_COMPLETE.md (Technical details)
+
+Useful during trading:
+  [ ] Keep READY_FOR_TOMORROW.md open (quick reference)
+  [ ] config_thinkorswim.py (check parameters if needed)
+
+After trading:
+  [ ] Review log file
+  [ ] Analyze win/loss patterns
+  [ ] Plan optimizations for week 2
+
+================================================================================
+                         FINAL CHECKLIST
+================================================================================
+
+Morning of 18 May 2026:
+
+[ ] Coffee ready ☕
+[ ] 3 terminal windows open
+[ ] .env file verified
+[ ] token.json exists
+[ ] Broker connection tested
+[ ] Logs folder created
+[ ] Dashboard ready to open
+[ ] Thinkorswim app ready
+[ ] Risk limits understood
+[ ] Emergency plan in mind
+[ ] This checklist printed or nearby
+
+READY? Start at 03:45 EST ✅
+
+================================================================================
+                    GOOD LUCK WITH YOUR TRADES! 📈
+                   Remember: Consistency > Speed
+                  Let the system work. Stay disciplined.
+================================================================================
+
+Completed by: ________________________   Date: ___________   Time: ___________
+
+Notes / Issues encountered:
+________________________________________________________________________________
+________________________________________________________________________________
+________________________________________________________________________________
+
+P&L for the day: $___________
+
+Overall impression:
+[ ] Excellent - System working perfectly
+[ ] Good - Minor issues, nothing critical
+[ ] Fair - Some unexpected behavior
+[ ] Poor - Multiple problems, needs investigation
