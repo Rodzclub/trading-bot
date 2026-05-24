@@ -1,0 +1,10 @@
+services:
+  - type: worker
+    name: trading-bot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: TD_ACCOUNT_ID
+        sync: false
